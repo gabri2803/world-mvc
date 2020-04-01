@@ -36,6 +36,7 @@ public class ListCountryServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		session.setAttribute("done", "");
 		req.setAttribute("countryList", countryList);
 		req.getRequestDispatcher("pages/show-list.jsp").forward(req, resp);
 

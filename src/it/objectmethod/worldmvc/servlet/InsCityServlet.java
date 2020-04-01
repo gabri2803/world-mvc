@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.objectmethod.worldmvc.dao.ICityDao;
 import it.objectmethod.worldmvc.dao.ICountryDao;
@@ -42,22 +43,26 @@ public class InsCityServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		ICityDao cityDao = new CityDaoImpl();
-		String nameCity = req.getParameter("cityName");
-		if (nameCity == null) {
-			String name = req.getParameter("name");
-			String countryCode = req.getParameter("code");
-			String district = req.getParameter("dist");
-			int population = Integer.valueOf(req.getParameter("pop"));
-			cityDao.postNewCity(name, countryCode, district, population);
-			req.getRequestDispatcher("/list-city?code=" + countryCode).forward(req, resp);
-		} else {
+		String nameCity = req.getParameter("nameCity");
+		if (nameCity != "") {
 			int idCity = Integer.valueOf(req.getParameter("idCity"));
 			String name = req.getParameter("name");
 			String countryCode = req.getParameter("code");
 			String district = req.getParameter("dist");
 			int population = Integer.valueOf(req.getParameter("pop"));
 			cityDao.putCity(idCity, name, countryCode, district, population);
+			session.setAttribute("done", "Modifica avvenuta con successo");
+			req.getRequestDispatcher("/list-city?code=" + countryCode).forward(req, resp);
+		}
+		if (nameCity == "") {
+			String name = req.getParameter("name");
+			String countryCode = req.getParameter("code");
+			String district = req.getParameter("dist");
+			int population = Integer.valueOf(req.getParameter("pop"));
+			cityDao.postNewCity(name, countryCode, district, population);
+			session.setAttribute("done", "Inserimento avvenuto con successo");
 			req.getRequestDispatcher("/list-city?code=" + countryCode).forward(req, resp);
 		}
 	}

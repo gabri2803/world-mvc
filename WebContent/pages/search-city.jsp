@@ -9,7 +9,7 @@
 </head>
 <body>
 	<form action="/world-mvc/search-by" method="get">
-	<a href="/world-mvc/search-by">Cerca un altra città</a><br>
+	<a href="/world-mvc/continent-list"><button type="submit">Lista Continenti</button></a>
 		Nome città: <input type="text" name="name"><br> Nazione: <select name="country" >
 			<option value=''>Nessuna nazione
 			<c:forEach items="${country}" var="country">
@@ -22,6 +22,7 @@
 		<p>${city.name}</p> 
 		</c:forEach>
 		</p>
+		<a href="/world-mvc/search-by">Cerca un altra città</a><br>
 	</form>
 </body>
 </html>

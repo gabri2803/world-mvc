@@ -10,7 +10,9 @@
 <body>
 <form method="post">
 <input type="hidden" name="idCity" value="${city.id}">
+<input type="hidden" name="nameCity" value="${city.name}">
 	ID: ${city.id} <br>
+	Nome Città: ${city.name}
 	Inserisci nuova città:
 	Name:
 	<input type="text" name="name" value="${city.name}"><br>
@@ -21,9 +23,9 @@
 			</c:forEach>
 	</select><br>
 	District:
-	<input type="text" name="dist"><br>
+	<input type="text" name="dist" value="${city.district}"><br>
 	Population:
-	<input type="text" name="pop"><br>
+	<input type="text" name="pop" value="${city.population}"><br>
 	<a href="/world-mvc/insert"><button type="submit">Aggiungi/Modifica</button></a>	
 </form>
 </body>

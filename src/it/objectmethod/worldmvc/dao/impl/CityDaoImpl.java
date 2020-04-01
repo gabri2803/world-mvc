@@ -252,7 +252,6 @@ public class CityDaoImpl implements ICityDao {
 				se.printStackTrace();
 			}
 		}
-		System.out.println(city);
 		return city;
 	}
 

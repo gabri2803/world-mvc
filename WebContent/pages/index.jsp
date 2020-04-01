@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/world-mvc/pages/show-city.jsp"><button type="button">Search
-			city by id</button></a>
-	<a href="/world-mvc/pages/show-country.jsp"><button type="button">Search
-			country by name and continent</button></a>
-	<a href="/world-mvc/pages/show-list.jsp"><button type="button">List
-			of continent</button></a>
+	<a href="/world-mvc/continent-list"><button type="submit">Lista Continenti</button></a>
 </body>
 </html>

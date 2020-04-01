@@ -27,6 +27,7 @@ public class ListCityServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String nomeCont = (String) session.getAttribute("nameCont");
+		String done = (String) session.getAttribute("done");
 		ICityDao cityDao = new CityDaoImpl();
 		String countryCode = req.getParameter("code");
 		List<City> list = new ArrayList<>();
@@ -35,7 +36,29 @@ public class ListCityServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("continents", nomeCont);
+		req.setAttribute("tornaCont", "<a href='/world-mvc/country-list?nameCont=" + nomeCont
+				+ "'><button type='submit'>Back to " + nomeCont + "</button></a>");
+		session.setAttribute("done", done);
+		req.setAttribute("cityList", list);
+		req.getRequestDispatcher("pages/show-list.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		String nomeCont = (String) session.getAttribute("nameCont");
+		String done = (String) session.getAttribute("done");
+		ICityDao cityDao = new CityDaoImpl();
+		String countryCode = req.getParameter("code");
+		List<City> list = new ArrayList<>();
+		try {
+			list = cityDao.getCitiesByCountryCode(countryCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		req.setAttribute("tornaCont", "<a href='/world-mvc/country-list?nameCont=" + nomeCont
+				+ "'><button type='submit'>Back to " + nomeCont + "</button></a>");
+		session.setAttribute("done", done);
 		req.setAttribute("cityList", list);
 		req.getRequestDispatcher("pages/show-list.jsp").forward(req, resp);
 	}
