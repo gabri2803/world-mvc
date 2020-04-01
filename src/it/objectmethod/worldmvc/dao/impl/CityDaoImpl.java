@@ -137,14 +137,12 @@ public class CityDaoImpl implements ICityDao {
 				se.printStackTrace();
 			}
 		}
-		System.out.println(list);
 		return list;
 
 	}
 
 	@Override
 	public void postNewCity(String name, String countryCode, String district, int population) {
-//		City city = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -156,11 +154,6 @@ public class CityDaoImpl implements ICityDao {
 			stmt.setString(3, district);
 			stmt.setInt(4, population);
 			stmt.executeUpdate();
-//			city = new City();
-//			city.setName(name);
-//			city.setCountryCode(countryCode);
-//			city.setDistrict(district);
-//			city.setPopulation(population);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -178,7 +171,6 @@ public class CityDaoImpl implements ICityDao {
 				se.printStackTrace();
 			}
 		}
-//		return city;
 	}
 
 	@Override

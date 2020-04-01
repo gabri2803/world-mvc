@@ -11,15 +11,17 @@
 <form method="post">
 <input type="hidden" name="idCity" value="${city.id}">
 <input type="hidden" name="nameCity" value="${city.name}">
-	ID: ${city.id} <br>
-	Nome Città: ${city.name}
 	Inserisci nuova città:
 	Name:
 	<input type="text" name="name" value="${city.name}"><br>
 	Country: 
 	<select name="code">
 		<c:forEach items="${country}" var="country">
-				<option value='${country.code}'>${country.name}
+				<option value='${country.code}'>
+				<c:choose>
+					<c:when test="${city.countryCode}">${country.name}</c:when>
+					<c:otherwise>${country.name}</c:otherwise>
+				</c:choose>
 			</c:forEach>
 	</select><br>
 	District:
