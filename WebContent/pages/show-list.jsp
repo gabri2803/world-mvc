@@ -17,7 +17,7 @@
 	
 	<c:forEach items="${continent}" var="continent">
 		<h2>
-			Name: <a href="/world-mvc/country-list?nameCont=${continent}">${continent}
+			<a href="/world-mvc/country-list?nameCont=${continent}">${continent}
 			</a>
 		</h2>
 	</c:forEach>
@@ -32,6 +32,5 @@
 		<a href="/world-mvc/insert?id=${city.id}"><button type="submit">Modifica</button></a>
 		</p>
 	</c:forEach>
-	
 </body>
 </html>

@@ -45,14 +45,14 @@ public class InsCityServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		ICityDao cityDao = new CityDaoImpl();
-		String nameCity = req.getParameter("nameCity");
+		String idCity = req.getParameter("idCity");
 		String name = req.getParameter("name");
 		String countryCode = req.getParameter("code");
 		String district = req.getParameter("dist");
 		int population = Integer.valueOf(req.getParameter("pop"));
-		if (nameCity != "") {
-			int idCity = Integer.valueOf(req.getParameter("idCity"));
-			cityDao.putCity(idCity, name, countryCode, district, population);
+		if (idCity != "") {
+			int id = Integer.valueOf(req.getParameter("idCity"));
+			cityDao.putCity(id, name, countryCode, district, population);
 			session.setAttribute("done", "Modifica avvenuta con successo");
 			req.getRequestDispatcher("/list-city?code=" + countryCode).forward(req, resp);
 		} else {

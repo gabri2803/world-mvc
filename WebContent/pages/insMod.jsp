@@ -10,7 +10,6 @@
 <body>
 <form method="post">
 <input type="hidden" name="idCity" value="${city.id}">
-<input type="hidden" name="nameCity" value="${city.name}">
 	Inserisci nuova città:
 	Name:
 	<input type="text" name="name" value="${city.name}"><br>
