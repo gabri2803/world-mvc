@@ -8,18 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post">
+<form method="post" action="/world-mvc/insert">
 <input type="hidden" name="idCity" value="${city.id}">
 	Inserisci nuova città:
 	Name:
 	<input type="text" name="name" value="${city.name}"><br>
 	Country: 
 	<select name="code">
-		<c:forEach items="${country}" var="country">
-				<option value='${country.code}'>
+		<c:forEach items="${countryList}" var="country">
 				<c:choose>
-					<c:when test="${city.countryCode}">${country.name}</c:when>
-					<c:otherwise>${country.name}</c:otherwise>
+					<c:when test="${city.countryCode == country.code}">
+						<option value="${country.code}" selected>${country.name}</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${country.code}">${country.name}</option>
+					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 	</select><br>
@@ -27,7 +30,7 @@
 	<input type="text" name="dist" value="${city.district}"><br>
 	Population:
 	<input type="text" name="pop" value="${city.population}"><br>
-	<a href="/world-mvc/insert"><button type="submit">Aggiungi/Modifica</button></a>	
+	<input type="submit" value="Salva"></input>
 </form>
 </body>
 </html>

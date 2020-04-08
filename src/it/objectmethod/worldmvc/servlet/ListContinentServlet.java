@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import it.objectmethod.worldmvc.dao.ICountryDao;
 import it.objectmethod.worldmvc.dao.impl.CountryDaoImpl;
@@ -24,7 +23,6 @@ public class ListContinentServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
 		List<String> list = new ArrayList<>();
 		ICountryDao countryDao = new CountryDaoImpl();
 		try {
@@ -32,7 +30,6 @@ public class ListContinentServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("done", "");
 		req.setAttribute("continent", list);
 		req.getRequestDispatcher("pages/show-list.jsp").forward(req, resp);
 	}

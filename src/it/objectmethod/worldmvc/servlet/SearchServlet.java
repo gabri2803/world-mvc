@@ -1,7 +1,6 @@
 package it.objectmethod.worldmvc.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -27,25 +26,35 @@ public class SearchServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Country> list = new ArrayList<>();
 		ICountryDao countryDao = new CountryDaoImpl();
+		ICityDao cityDao = new CityDaoImpl();
+
+		List<Country> list = null;
+
+		String cityName = req.getParameter("name");
+		String country = req.getParameter("country");
+
 		try {
 			list = countryDao.getAllCountry();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		req.setAttribute("country", list);
 
-		ICityDao cityDao = new CityDaoImpl();
-		List<City> city = new ArrayList<>();
-		String cityName = req.getParameter("name");
-		String country = req.getParameter("country");
+		List<City> cities = null;
+
 		try {
-			city = cityDao.getCityByNameOrByCountry(cityName, country);
+			if (cityName == null) {
+				cityName = "";
+			}
+			if (country == null) {
+				country = "";
+			}
+			cities = cityDao.getCityByNameOrByCountry(cityName, country);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		req.setAttribute("city", city);
+		req.setAttribute("countryList", list);
+		req.setAttribute("cityList", cities);
 		req.getRequestDispatcher("pages/search-city.jsp").forward(req, resp);
 	}
 

@@ -8,21 +8,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="/world-mvc/continent-list"><button>Lista Continenti</button></a>
 	<form action="/world-mvc/search-by" method="get">
-	<a href="/world-mvc/continent-list"><button type="submit">Lista Continenti</button></a>
 		Nome città: <input type="text" name="name"><br> Nazione: <select name="country" >
-			<option value=''>Nessuna nazione
-			<c:forEach items="${country}" var="country">
-				<option value='${country.code}'>${country.name}
+			<option value=''>Nessuna nazione</option>
+			<c:forEach items="${countryList}" var="country">
+				<option value='${country.code}'>${country.name}</option>
 			</c:forEach>
 			</select>	<br>	
-		<button type="submit" formaction="/world-mvc/search-by">Search</button>
-		<p>
-		<c:forEach items="${city}" var="city">
-		<p>${city.name}</p> 
-		</c:forEach>
-		</p>
-		<a href="/world-mvc/search-by">Cerca un altra città</a><br>
+		<input type="submit" value="Search"></input>
 	</form>
+	<p>
+		<c:forEach items="${cityList}" var="city">
+				<p>${city.name}</p> 
+			</c:forEach>
+	</p>
 </body>
 </html>

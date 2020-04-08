@@ -1,7 +1,6 @@
 package it.objectmethod.worldmvc.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -25,20 +24,25 @@ public class ListCountryServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		String nomeCont = req.getParameter("nameCont");
-		List<Country> countryList = new ArrayList<>();
 		ICountryDao countryDao = new CountryDaoImpl();
-		session.setAttribute("nameCont", nomeCont);
+		HttpSession session = req.getSession();
+
+		String nomeCont = req.getParameter("nameCont");
+		if (nomeCont != null) {
+			session.setAttribute("nameCont", nomeCont);
+		} else {
+			nomeCont = (String) session.getAttribute("nameCont");
+		}
+
+		List<Country> countryList = null;
 		try {
 			countryList = countryDao.getCountriesByContinent(nomeCont);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("done", "");
 		req.setAttribute("countryList", countryList);
-		req.getRequestDispatcher("pages/show-list.jsp").forward(req, resp);
+		req.getRequestDispatcher("pages/show-list-countries.jsp").forward(req, resp);
 
 	}
 }

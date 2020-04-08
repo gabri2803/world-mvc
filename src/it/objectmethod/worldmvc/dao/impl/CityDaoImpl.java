@@ -105,10 +105,12 @@ public class CityDaoImpl implements ICityDao {
 		ResultSet rs = null;
 		try {
 			conn = ConnectionFactory.getConnection();
-			String sql = "SELECT * FROM city JOIN country ON city.countrycode = country.code WHERE city.name LIKE '%"
-					+ cityName + "%' OR country.code= ?";
+			String sql = "SELECT * FROM city JOIN country ON city.countrycode = country.code WHERE city.name LIKE ? "
+					+ "AND (? = '' OR country.code= ?) LIMIT 10";
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, country);
+			stmt.setString(1, "%" + cityName + "%");
+			stmt.setString(2, country);
+			stmt.setString(3, country);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				city = new City();
@@ -147,7 +149,7 @@ public class CityDaoImpl implements ICityDao {
 		PreparedStatement stmt = null;
 		try {
 			conn = ConnectionFactory.getConnection();
-			String sql = "INSERT INTO City (name, countryCode, district, population) VALUES (?, ?, ?, ?);";
+			String sql = "INSERT INTO city (name, countryCode, district, population) VALUES (?, ?, ?, ?);";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, name);
 			stmt.setString(2, countryCode);

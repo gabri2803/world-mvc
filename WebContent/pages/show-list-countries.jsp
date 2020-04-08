@@ -8,12 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/world-mvc/search-by"><button>Search City</button></a>
-	<c:forEach items="${continent}" var="continent">
-		<h2>
-			<a href="/world-mvc/country-list?nameCont=${continent}">${continent}
-			</a>
-		</h2>
+	<a href="/world-mvc/continent-list"><button>Lista Continenti</button></a>
+	<c:forEach items="${countryList}" var="country">
+		<p>
+			Name: <a href="/world-mvc/list-city?code=${country.code}">${country.name}</a>
+			-- Population: ${country.population}
+		</p>
 	</c:forEach>
 </body>
 </html>
